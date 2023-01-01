@@ -1,0 +1,9 @@
+.button-wrapper {
+  min-width: 50px;
+
+  &__button {
+    width: transparent;
+    min-height: 20px;
+    padding: 8px 15px;
+  }
+}
