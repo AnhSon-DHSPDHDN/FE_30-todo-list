@@ -7,3 +7,18 @@
   min-height: 400px;
   padding: 30px 20px;
 }
+
+.add-task-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-add-task {
+  min-width: 100px;
+}
+
+.todo-list-title {
+  text-align: center;
+}

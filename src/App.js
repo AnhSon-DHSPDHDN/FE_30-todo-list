@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
 import TodoListLayout from "./layouts/TodoListLayout";
+import "./App.css";
 
 function App() {
   return (
