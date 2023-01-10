@@ -3,12 +3,20 @@ import Button from "../../components/Button";
 import Divider from "../../components/Divider";
 import InputTask from "../../components/InputTask";
 import Task from "../../components/Task";
+import { KEY_LIST_TASK } from "../../constants";
 import { makeRandomId } from "../../utils";
 import "./TodoListLayout.scss"
 
 const TodoListLayout = () => {
   const [inputTask, setInputTask] = useState('');
-  const [tasksList, setTasksList] = useState([]);
+  const [tasksList, setTasksList] = useState(
+    JSON.parse(localStorage.getItem(KEY_LIST_TASK)) || []
+  );
+  // paginationState = {
+  //   currentPage: 0,
+  //   totalPage: 100,
+  //   limit: 5,
+  // }
 
   const handleChangeInputTask = (event) => {
     const value = event.target.value
@@ -22,7 +30,11 @@ const TodoListLayout = () => {
       isDone: false
     }
 
-    setTasksList(prevTasks => ([taskItem, ...prevTasks]))
+    setTasksList(prevTasks => {
+      const newTasksList = [taskItem, ...prevTasks]
+      localStorage.setItem(KEY_LIST_TASK, JSON.stringify(newTasksList))
+      return newTasksList
+    })
     setInputTask('')
   }
 
@@ -36,6 +48,7 @@ const TodoListLayout = () => {
     setTasksList(prevTasks => {
       const prevTasksClone = [...prevTasks]
       prevTasksClone[indexExistTask] = taskDone
+      localStorage.setItem(KEY_LIST_TASK, JSON.stringify(prevTasksClone))
       return prevTasksClone;
     })
   }
@@ -46,6 +59,7 @@ const TodoListLayout = () => {
     setTasksList(prevTasks => {
       const prevTasksClone = [...prevTasks];
       prevTasksClone.splice(indexExistTask, 1)
+      localStorage.setItem(KEY_LIST_TASK, JSON.stringify(prevTasksClone))
       return prevTasksClone
     })
   }
